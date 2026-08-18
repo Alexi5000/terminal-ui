@@ -9,6 +9,19 @@
 
 > 🤖 **AI Agent Friendly!** This repo has comprehensive guides for AI agents (OpenClaw, etc.) to contribute automatically. See [AGENTS.md](AGENTS.md) and [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md).
 
+## Alexi5000 fork purpose
+
+This repository is **Alexi5000’s applied terminal-interface reference fork** for agent-building and automation work. Alex’s experience across more than a year of building agents, integrations, and AI-assisted development with Cursor, Claude, Codex-class tools, MCP patterns, and automation systems informs the fork’s focus on terminal-like interfaces that make agent state, tool activity, streaming output, and operator controls understandable.
+
+The upstream project remains the foundation for the component library. This fork adds an explicit review lens for agent-facing interfaces: accessible keyboard interaction, transparent tool and automation feedback, reproducible local validation, and documented boundaries for credentials and externally consequential actions.
+
+| Use case | Starting point |
+|---|---|
+| Agent-control or operator console | Start with `TerminalApp`, `TerminalLog`, `TerminalStatusBar`, and `TerminalPrompt` to make activity and operator input visible. |
+| AI-assisted developer tool | Use `TerminalCommand`, `TerminalOutput`, `TerminalDiff`, and `TerminalTree` for inspectable command, patch, and repository workflows. |
+| Tool-connected automation interface | Combine `TerminalPane`, `TerminalTabs`, `TerminalAlert`, and `TerminalProgress` to surface state, review points, and safe user confirmation. |
+| Learning and prototyping | Use the playground and the component matrix to evaluate accessible terminal UI patterns before adapting them to a production application. |
+
 ## 🎯 What is this?
 
 A collection of React components that bring the elegance of terminal UIs to the browser. Perfect for:
@@ -27,7 +40,27 @@ A collection of React components that bring the elegance of terminal UIs to the 
 - 📱 **Responsive** - Works on desktop and mobile
 - 🎭 **Customizable** - Theming system with CSS variables
 
-## 🚀 Quick Start
+## Verified setup
+
+Use Node.js 24 and pnpm 10.28.2 (the version declared by `package.json`). The following workflow installs the locked dependency tree, starts the local component playground, and verifies the repository-quality contract.
+
+```bash
+git clone https://github.com/Alexi5000/terminal-ui.git
+cd terminal-ui
+pnpm install --frozen-lockfile
+pnpm run dev
+```
+
+Open `http://localhost:3000` to use the local playground. Before opening a pull request, run:
+
+```bash
+pnpm run lint
+pnpm run typecheck
+pnpm run test
+pnpm run build
+```
+
+To consume the upstream package in another application, use:
 
 ```bash
 pnpm add @openknots/terminal-ui
@@ -158,6 +191,12 @@ Agents that follow AGENTS.md consistently produce **production-ready PRs** that 
 
 **Result:** High-quality automated contributions! 🎉
 
+## Support and responsible use
+
+For a reproducible component defect, documentation correction, or fork-specific improvement, open a focused [GitHub issue](https://github.com/Alexi5000/terminal-ui/issues) with the affected component, browser or runtime details, expected behavior, and sanitized reproduction steps. For support, security, conduct, and fork-maintenance expectations, read [SUPPORT.md](./SUPPORT.md), [SECURITY.md](./SECURITY.md), [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md), and [FORK_POLICY.md](./FORK_POLICY.md).
+
+Do not include API keys, OAuth tokens, private prompts, customer data, or unreported vulnerabilities in public issues. Treat every agent or automation integration as code requiring its own credentials review, least-privilege design, and confirmation model for consequential external actions.
+
 ## 🤝 Contributing
 
 We **love** contributions! This repo is designed for practice PRs.
@@ -193,6 +232,10 @@ We **love** contributions! This repo is designed for practice PRs.
 1. **Make CLI UIs accessible** - Bring terminal aesthetics to the web
 2. **Practice PR workflow** - Perfect for testing tools like [code-flow](https://github.com/OpenKnots/code-flow)
 3. **Build community** - Create a library together
+
+## Upstream attribution
+
+This repository is a fork of [OpenKnots/terminal-ui](https://github.com/OpenKnots/terminal-ui). Upstream authors and contributors retain full credit for their work and the MIT license. Fork-specific documentation, agent-interface guidance, and quality automation are maintained by Alexi5000; they should not be represented as upstream policy unless separately accepted upstream.
 
 ## 📜 License
 

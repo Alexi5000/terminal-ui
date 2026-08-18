@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { TerminalApp } from '@/components/terminal-app'
 
@@ -7,7 +8,7 @@ export default function Home() {
       {/* Hero */}
       <section className="flex flex-col items-center px-4 pt-16 pb-12">
         <div className="mb-2 flex items-center gap-3">
-          <img src="/logo.png" alt="OpenKnots" className="h-10 w-10" />
+          <Image src="/logo.png" alt="OpenKnots" width={40} height={40} className="h-10 w-10" priority />
           <h1 className="text-4xl font-bold tracking-tight text-[var(--term-fg)]">
             terminal-ui
           </h1>

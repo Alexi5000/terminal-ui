@@ -9,6 +9,8 @@
     "start": "next start",
     "lint": "pnpm exec eslint .",
     "typecheck": "tsc --noEmit",
+    "test": "node --test tests/project-contract.test.mjs",
+    "test:smoke": "node --test tests/project-contract.test.mjs",
     "format": "prettier --write ."
   },
   "keywords": [

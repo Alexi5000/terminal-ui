@@ -187,6 +187,7 @@ const TreeRow = memo(function TreeRow({
       role="treeitem"
       aria-expanded={hasChildren && expandable ? isExpanded : undefined}
       aria-level={depth + 1}
+      aria-selected={isFocused}
       tabIndex={isFocused ? 0 : -1}
       onFocus={() => onFocus(nodeId)}
       onKeyDown={(e) => onKeyDown(e, entry, index)}

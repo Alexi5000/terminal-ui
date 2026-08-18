@@ -9,7 +9,7 @@ import {
   useState,
 } from 'react'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { useTheme, THEMES, type ThemeId } from '@/components/terminal-themes'
+import { useTheme, THEMES } from '@/components/terminal-themes'
 import { cn } from '@/lib/utils'
 import { TerminalProgress } from './terminal-progress'
 
@@ -370,6 +370,7 @@ export function TerminalPane({
 
   return (
     <div
+      data-terminal-pane-id={id}
       className={cn(
         'flex h-full flex-col bg-[var(--term-bg)] font-mono text-sm',
         isFocused && 'ring-1 ring-[var(--term-green)]/20 ring-inset',

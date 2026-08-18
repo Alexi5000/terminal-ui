@@ -6,3 +6,11 @@
 README.md @OpenKnots
 CONTRIBUTING.md @OpenKnots
 AGENTS.md @OpenKnots
+
+# Alexi5000-specific fork policy and quality ownership
+.github/workflows/ci.yml @Alexi5000
+CODE_OF_CONDUCT.md @Alexi5000
+FORK_POLICY.md @Alexi5000
+SECURITY.md @Alexi5000
+SUPPORT.md @Alexi5000
+tests/ @Alexi5000
