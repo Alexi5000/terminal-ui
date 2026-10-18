@@ -1,12 +1,14 @@
-const assert = require('node:assert/strict');
-const { createRequire } = require('node:module');
-const { readFileSync } = require('node:fs');
-const { createHash } = require('node:crypto');
-const path = require('node:path');
+import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
+import { readFileSync, existsSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const loadRoot = createRequire(import.meta.url);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const root = path.resolve(__dirname, '..');
 const manifest = JSON.parse(readFileSync(path.join(root, 'vendor/braces/integrity.json')));
-const { existsSync } = require('node:fs');
 if (existsSync(path.join(root, 'pnpm-lock.yaml'))) {
   const lock = readFileSync(path.join(root, 'pnpm-lock.yaml'), 'utf8');
   assert.ok(lock.includes('braces@file:vendor/braces-3.0.3.tgz'));
@@ -20,9 +22,9 @@ if (existsSync(path.join(root, 'pnpm-lock.yaml'))) {
   }
 }
 const consumers = ['braces'];
-try { require.resolve('micromatch'); consumers.push('micromatch'); } catch {}
+try { loadRoot.resolve('micromatch'); consumers.push('micromatch'); } catch {}
 for (const consumer of consumers) {
-  const load = consumer === 'braces' ? require : createRequire(require.resolve(consumer));
+  const load = consumer === 'braces' ? loadRoot : createRequire(loadRoot.resolve(consumer));
   const entry = load.resolve('braces');
   const directory = path.dirname(entry);
   for (const [file, expected] of Object.entries(manifest)) {
