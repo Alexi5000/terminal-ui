@@ -2,7 +2,7 @@
 
 > Beautiful terminal-like UI components for the web. Build CLI experiences in React.
 
-[![CI](https://github.com/OpenKnots/terminal-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/OpenKnots/terminal-ui/actions/workflows/ci.yml)
+[![CI](https://github.com/Alexi5000/terminal-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/Alexi5000/terminal-ui/actions/workflows/ci.yml)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![AI Agent Friendly](https://img.shields.io/badge/AI%20agents-welcome-purple.svg)](AGENTS.md)
@@ -67,7 +67,7 @@ pnpm add @openknots/terminal-ui
 ```
 
 ```tsx
-import { Terminal, TerminalCommand } from '@openknots/terminal-ui'
+import { Terminal, TerminalCommand, TerminalOutput } from '@openknots/terminal-ui'
 
 export default function App() {
   return (
@@ -230,7 +230,7 @@ We **love** contributions! This repo is designed for practice PRs.
 ## 🎯 Project Goals
 
 1. **Make CLI UIs accessible** - Bring terminal aesthetics to the web
-2. **Practice PR workflow** - Perfect for testing tools like [code-flow](https://github.com/OpenKnots/code-flow)
+2. **Practice PR workflow** - Use a focused branch, run the quality checks, and open a pull request with validation evidence.
 3. **Build community** - Create a library together
 
 ## Upstream attribution
