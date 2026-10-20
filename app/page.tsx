@@ -25,7 +25,7 @@ export default function Home() {
             Open Playground
           </Link>
           <a
-            href="https://github.com/OpenKnots/terminal-ui"
+            href="https://github.com/Alexi5000/terminal-ui"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-md border border-[var(--glass-border)] px-4 py-2 text-[var(--term-fg-dim)] transition-colors hover:bg-[var(--glass-bg)] hover:text-[var(--term-fg)]"

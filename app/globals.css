@@ -331,3 +331,9 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-block {
+    animation: none;
+  }
+}
