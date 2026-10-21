@@ -9,11 +9,15 @@
 
 > 🤖 **AI Agent Friendly!** This repo has comprehensive guides for AI agents (OpenClaw, etc.) to contribute automatically. See [AGENTS.md](AGENTS.md) and [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md).
 
-## Alexi5000 fork purpose
+## Why this fork exists
 
-This repository is **Alexi5000’s applied terminal-interface reference fork** for agent-building and automation work. Alex’s experience across more than a year of building agents, integrations, and AI-assisted development with Cursor, Claude, Codex-class tools, MCP patterns, and automation systems informs the fork’s focus on terminal-like interfaces that make agent state, tool activity, streaming output, and operator controls understandable.
+**What it does.** terminal-ui is a Next.js and React component library that renders terminal-style interfaces in the browser: a window container, command and output lines, logs, progress, tables, trees, diffs, prompts, tabs, and a local playground at `/playground`. This fork keeps the upstream components and adds a CI quality gate (lint, typecheck, smoke test, build), a repository contract test, and fork policy documents.
 
-The upstream project remains the foundation for the component library. This fork adds an explicit review lens for agent-facing interfaces: accessible keyboard interaction, transparent tool and automation feedback, reproducible local validation, and documented boundaries for credentials and externally consequential actions.
+**Who it serves.** Developers building operator consoles or dashboards for AI agents and automation, who need agent state, streaming output, and operator input to be visible and keyboard accessible, and who want a reproducible local validation path before shipping.
+
+**Why Alex forked it.** The fork was created on 2026-02-25 (GitHub `created_at`). The first fork-only commits establish it as an agent-interface reference: `ffbb504` (2026-08-17, "ci: add lint and smoke-test quality gates") and `8357f2d` (2026-08-18, "chore: establish agent-interface fork standards"), which added `FORK_POLICY.md`, `SUPPORT.md`, `SECURITY.md`, and the contract test. `FORK_POLICY.md` records the purpose as "an applied terminal-interface reference fork" that adds "guidance for agent-building, automation visibility, operator experience, repository quality, and safe integration review". Later fork-only commits are maintenance: `360510b` (2026-10-18, dependency refresh and a vendored `braces` recursion guard) and `af6c6c2` (2026-10-20, compile Tailwind styles and respect reduced motion).
+
+**Real-world use case (2025–2026 evidence).** **Proposed use case.** A team running coding agents wants a browser console that shows each agent's command stream, tool output, and diffs, with keyboard navigation and a reduced-motion mode. The playground in this repository demonstrates those primitives, but no deployment of such a console is recorded here. The stack choices are current: Tailwind CSS v4 moved to a CSS-first configuration and a new engine in January 2025[^1], Next.js 16 shipped in October 2025 with Turbopack as the default bundler[^2], React 19.2 added Activity and View Transitions in October 2025[^3], and Node.js 24 (the CI runtime here) was released in May 2025[^4].
 
 | Use case | Starting point |
 |---|---|
@@ -21,6 +25,11 @@ The upstream project remains the foundation for the component library. This fork
 | AI-assisted developer tool | Use `TerminalCommand`, `TerminalOutput`, `TerminalDiff`, and `TerminalTree` for inspectable command, patch, and repository workflows. |
 | Tool-connected automation interface | Combine `TerminalPane`, `TerminalTabs`, `TerminalAlert`, and `TerminalProgress` to surface state, review points, and safe user confirmation. |
 | Learning and prototyping | Use the playground and the component matrix to evaluate accessible terminal UI patterns before adapting them to a production application. |
+
+[^1]: Tailwind CSS v4.0 release post, tailwindcss.com, published 2025-01-22. https://tailwindcss.com/blog/tailwindcss-v4
+[^2]: Next.js 16 release post, nextjs.org, published 2025-10-21. https://nextjs.org/blog/next-16
+[^3]: React 19.2 release post, react.dev, published 2025-10-01. https://react.dev/blog/2025/10/01/react-19-2
+[^4]: Node.js 24.0.0 release notes, nodejs.org, published 2025-05-06. https://nodejs.org/en/blog/release/v24.0.0
 
 ## 🎯 What is this?
 
@@ -60,14 +69,10 @@ pnpm run test
 pnpm run build
 ```
 
-To consume the upstream package in another application, use:
-
-```bash
-pnpm add @openknots/terminal-ui
-```
+The package is not published to the npm registry as of 2026-10-21 (`npm view @openknots/terminal-ui` returns 404), and `package.json` declares no `main` or `exports` entry. To use the components in another application, copy the files you need from `components/` and `lib/` into your project and import them through your own path alias, as the playground does:
 
 ```tsx
-import { Terminal, TerminalCommand, TerminalOutput } from '@openknots/terminal-ui'
+import { Terminal, TerminalCommand, TerminalOutput } from '@/components/terminal'
 
 export default function App() {
   return (
@@ -88,12 +93,14 @@ export default function App() {
 - **TerminalOutput** - Format command output
 - **TerminalSpinner** - Loading indicators
 
-### Coming Soon (Good First Issues!)
+### Also implemented in this repository
 
-- **TerminalProgress** - Progress bars → [Issue #2](../../issues/2)
-- **TerminalTable** - Render tables → [Issue #4](../../issues/4)
-- **TerminalTree** - File tree views → [Issue #9](../../issues/9)
-- **TerminalPrompt** - Interactive input → [Issue #12](../../issues/12)
+- **TerminalProgress** - Progress bars ([components/terminal-progress.tsx](components/terminal-progress.tsx))
+- **TerminalTable** - Render tables ([components/terminal-table.tsx](components/terminal-table.tsx))
+- **TerminalTree** - File tree views ([components/terminal-tree.tsx](components/terminal-tree.tsx))
+- **TerminalPrompt** - Interactive input ([components/terminal-prompt.tsx](components/terminal-prompt.tsx))
+
+See the status matrix below for maturity. Upstream good-first-issues live at [OpenKnots/terminal-ui/issues](https://github.com/OpenKnots/terminal-ui/issues?q=label%3A%22good-first-issue%22).
 
 ## 📊 Component Status Matrix
 
@@ -104,7 +111,7 @@ export default function App() {
 | `TerminalOutput` | ✅ Stable | ✅ | Semantic output colors + optional animation |
 | `TerminalSpinner` | ✅ Stable | ✅ | Braille frame animation for loading states |
 | `TerminalTree` | ✅ Stable | ✅ | Expandable tree with render-props + keyboard nav |
-| `TerminalBadge` | ✅ Stable | — | Inline status badges with variant colors |
+| `TerminalBadge` | ✅ Stable | n/a | Inline status badges with variant colors |
 | `TerminalDiff` | ✅ Stable | ✅ | Unified and split diff views |
 | `TerminalLog` | 🧪 Beta | ✅ | Streaming log viewer with capped history |
 | `TerminalTable` | 🧪 Beta | ✅ | Terminal-style tabular data |
@@ -158,10 +165,10 @@ and implement a good-first-issue
 
 ### Key Resources
 
-- **[AGENTS.md](AGENTS.md)** — Complete agent guide (13KB, read this first!)
-- **[PROJECT_CONTEXT.md](PROJECT_CONTEXT.md)** — Project status and decisions
-- **[OPENCLAW_USAGE.md](OPENCLAW_USAGE.md)** — OpenClaw-specific instructions
-- **[.github/STARTER_ISSUES.md](.github/STARTER_ISSUES.md)** — 12 pre-written issues to implement
+- **[AGENTS.md](AGENTS.md)**: Complete agent guide (13KB, read this first!)
+- **[PROJECT_CONTEXT.md](PROJECT_CONTEXT.md)**: Project status and decisions
+- **[OPENCLAW_USAGE.md](OPENCLAW_USAGE.md)**: OpenClaw-specific instructions
+- **[.github/STARTER_ISSUES.md](.github/STARTER_ISSUES.md)**: 12 pre-written issues to implement
 
 ### What Agents Can Do
 
@@ -196,6 +203,26 @@ Agents that follow AGENTS.md consistently produce **production-ready PRs** that 
 For a reproducible component defect, documentation correction, or fork-specific improvement, open a focused [GitHub issue](https://github.com/Alexi5000/terminal-ui/issues) with the affected component, browser or runtime details, expected behavior, and sanitized reproduction steps. For support, security, conduct, and fork-maintenance expectations, read [SUPPORT.md](./SUPPORT.md), [SECURITY.md](./SECURITY.md), [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md), and [FORK_POLICY.md](./FORK_POLICY.md).
 
 Do not include API keys, OAuth tokens, private prompts, customer data, or unreported vulnerabilities in public issues. Treat every agent or automation integration as code requiring its own credentials review, least-privilege design, and confirmation model for consequential external actions.
+
+## Security
+
+No open Dependabot, code-scanning, or secret-scanning alerts were recorded for this repository on 2026-10-20. Fork commit `360510b` (2026-10-18) refreshed dependencies and pinned `braces` to a vendored `3.0.3` build with a recursion guard (`vendor/braces-3.0.3.tgz`, enforced through `pnpm.overrides` and checked by `scripts/verify-braces.mjs` during `pnpm run build`). Report vulnerabilities through [SECURITY.md](SECURITY.md), not public issues.
+
+## Upstream
+
+- Upstream project: [OpenKnots/terminal-ui](https://github.com/OpenKnots/terminal-ui)
+- Upstream license: MIT, preserved unchanged in [LICENSE](LICENSE). This fork does not relicense.
+- Fork created: 2026-02-25 (GitHub `created_at`)
+- Sync state on 2026-10-20: 4 commits ahead of `upstream/main`, 0 behind (`gh api repos/Alexi5000/terminal-ui/compare/OpenKnots:main...Alexi5000:main`).
+
+**What changed in this fork** (`git log upstream/main..origin/main`, 4 commits, 33 files changed, +4538/-2375):
+
+- `8357f2d` (2026-08-18): fork standards, including `FORK_POLICY.md`, `SUPPORT.md`, `SECURITY.md`, `AGENTS.md` updates, and `tests/project-contract.test.mjs`.
+- `ffbb504` (2026-08-17): `.github/workflows/ci.yml` quality gate (lint, typecheck, smoke test, build) and a PR title check.
+- `360510b` (2026-10-18): dependency refresh and the vendored `braces` recursion guard.
+- `af6c6c2` (2026-10-20): compiled Tailwind styles, mobile layout fixes, and `prefers-reduced-motion` handling.
+
+Upstream authors and contributors retain full credit for their work. Fork-specific documentation, agent-interface guidance, and quality automation are maintained by Alex Cinovoj, Founder & CTO of TechTide AI; they should not be represented as upstream policy unless separately accepted upstream.
 
 ## 🤝 Contributing
 
@@ -232,10 +259,6 @@ We **love** contributions! This repo is designed for practice PRs.
 1. **Make CLI UIs accessible** - Bring terminal aesthetics to the web
 2. **Practice PR workflow** - Use a focused branch, run the quality checks, and open a pull request with validation evidence.
 3. **Build community** - Create a library together
-
-## Upstream attribution
-
-This repository is a fork of [OpenKnots/terminal-ui](https://github.com/OpenKnots/terminal-ui). Upstream authors and contributors retain full credit for their work and the MIT license. Fork-specific documentation, agent-interface guidance, and quality automation are maintained by Alexi5000; they should not be represented as upstream policy unless separately accepted upstream.
 
 ## 📜 License
 

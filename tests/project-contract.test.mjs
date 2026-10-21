@@ -36,13 +36,13 @@ test("agent-oriented terminal primitives and playground routes are present", () 
 
 test("README states the fork purpose, verified setup, use cases, and support path", () => {
   for (const marker of [
-    "## Alexi5000 fork purpose",
-    "Alexi5000’s applied terminal-interface reference fork",
+    "## Why this fork exists",
+    "**Why Alex forked it.**",
     "## Verified setup",
     "pnpm install --frozen-lockfile",
     "pnpm run test",
     "## Support and responsible use",
-    "## Upstream attribution",
+    "## Upstream",
   ]) {
     assert.ok(readme.includes(marker), `missing README marker: ${marker}`);
   }
